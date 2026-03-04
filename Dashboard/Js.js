@@ -34,9 +34,7 @@ async function updateData() {
         console.error("Errore updateData:", err);
     }
 }
-
-// aggiorna ogni 2 secondi (non 500ms)
-setInterval(updateData, 2000);
+setInterval(updateData, 500);
 updateData(); // primo avvio
 
 
