@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pannello di Controllo Serra</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="Js.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Controllo Modalità -->
+        <div class="top-controls">
+            <div class="mode-buttons">
+                <button class="mode-btn active" onclick="setMode('auto')">AUTO</button>
+                <button class="mode-btn" onclick="setMode('manual')">MANUALE</button>
+            </div>
+            <div class="emergency" id="emergency">NORMAL</div>
+        </div>
+
+        <h1>🌱 Dashboard Serra </h1>
+        
+        <!-- GLOBAL SECTION -->
+        <div class="global-section">
+            <h2>Global Greenhouse Data</h2>
+            <div class="global-data">
+                <div class="data-card">
+                    <h3> Temperatura media ambiente</h3>
+                    <div class="value" id="avgTemp">24°C</div>
+                </div>
+                <div class="data-card">
+                    <h3>Umidità media ambiente</h3>
+                    <div class="value" id="avgHumidity">65%</div>
+                </div>
+                <div class="data-card">
+                    <h3>Irraggiamento</h3>
+                    <div class="value" id="globalLight">720 lux</div>
+                </div>
+            </div>
+
+            <h2>Controlli Globali</h2>
+            <div class="global-controls">
+                <div class="control-card">
+                    <h3>🌀 Ventole in immissione </h3>
+                    <input type="range" class="slider" min="0" max="100" value="0" id="fanSlider1">
+                    <div class="slider-value">Speed: <span id="fanValue1">0</span>%</div>
+                    <button class="btn-on" onclick="toggleFan(1)">Turn On</button>
+                    <button class="btn-off" onclick="toggleFan(1)">Turn Off</button>
+                    <div class="status inactive" id="fanStatus1">OFF</div>
+                    
+                    <h3 style="margin-top: 20px;">🌀 Ventole di estrazione</h3>
+                    <input type="range" class="slider" min="0" max="100" value="0" id="fanSlider2">
+                    <div class="slider-value">Speed: <span id="fanValue2">0</span>%</div>
+                    <button class="btn-on" onclick="toggleFan(2)">Turn On</button>
+                    <button class="btn-off" onclick="toggleFan(2)">Turn Off</button>
+                    <div class="status inactive" id="fanStatus2">OFF</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHARTS SECTION -->
+        <div class="chart-section">
+            <div class="chart-card">
+                <h3>📊 Temperatura nel tempo</h3>
+                <div class="chart-placeholder">Chart placeholder - Temperature</div>
+            </div>
+            <div class="chart-card">
+                <h3>💧 Umidità nel tempo</h3>
+                <div class="chart-placeholder">Chart placeholder - Humidity</div>
+            </div>
+        </div>
+
+        <!-- GROWING PADS SECTION -->
+        <div class="pads-section">
+            <h2>Piante</h2>
+            <div class="pads-grid">
+                <!-- Pad 1 -->
+                <div class="pad-widget">
+                    <h3>🌿 Pad 1</h3>
+                    <div class="pad-data">
+                        <div class="pad-data-item">
+                            <label>Temperatura</label>
+                            <div class="value" id="pad1Temp">23°C</div>
+                        </div>
+                        <div class="pad-data-item">
+                            <label>Umidità</label>
+                            <div class="value" id="pad1Humidity">62%</div>
+                        </div>
+                    </div>
+                    <div class="control-card" style="background: white; border: none; padding: 0;">
+                        <h3 style="margin-bottom: 12px;">💧 Irrigazione</h3>
+                        <input type="range" class="slider" min="0" max="100" value="0" id="pumpSlider1">
+                        <div class="slider-value">Velocità: <span id="pumpValue1">0</span>%</div>
+                        <button class="btn-on" onclick="togglePump(1)">Turn On</button>
+                        <button class="btn-off" onclick="togglePump(1)">Turn Off</button>
+                        <div class="status inactive" id="pumpStatus1">OFF</div>
+                    </div>
+                </div>
+
+                <!-- Pad 2 -->
+                <div class="pad-widget">
+                    <h3>🌿 Pianta 2</h3>
+                    <div class="pad-data">
+                        <div class="pad-data-item">
+                            <label>Temperatura</label>
+                            <div class="value" id="pad2Temp">24°C</div>
+                        </div>
+                        <div class="pad-data-item">
+                            <label>Umidità</label>
+                            <div class="value" id="pad2Humidity">66%</div>
+                        </div>
+                    </div>
+                    <div class="control-card" style="background: white; border: none; padding: 0;">
+                        <h3 style="margin-bottom: 12px;">💧 Irrigazione</h3>
+                        <input type="range" class="slider" min="0" max="100" value="0" id="pumpSlider2">
+                        <div class="slider-value">Speed: <span id="pumpValue2">0</span>%</div>
+                        <button class="btn-on" onclick="togglePump(2)">Turn On</button>
+                        <button class="btn-off" onclick="togglePump(2)">Turn Off</button>
+                        <div class="status inactive" id="pumpStatus2">OFF</div>
+                    </div>
+                </div>
+
+                <!-- Pad 3 -->
+                <div class="pad-widget">
+                    <h3>🌿 Pianta 3</h3>
+                    <div class="pad-data">
+                        <div class="pad-data-item">
+                            <label>Temperatura</label>
+                            <div class="value" id="pad3Temp">25°C</div>
+                        </div>
+                        <div class="pad-data-item">
+                            <label>Umidità</label>
+                            <div class="value" id="pad3Humidity">68%</div>
+                        </div>
+                    </div>
+                    <div class="control-card" style="background: white; border: none; padding: 0;">
+                        <h3 style="margin-bottom: 12px;">💧 Irrigazione</h3>
+                        <input type="range" class="slider" min="0" max="100" value="0" id="pumpSlider3">
+                        <div class="slider-value">Speed: <span id="pumpValue3">0</span>%</div>
+                        <button class="btn-on" onclick="togglePump(3)">Turn On</button>
+                        <button class="btn-off" onclick="togglePump(3)">Turn Off</button>
+                        <div class="status inactive" id="pumpStatus3">OFF</div>
+                    </div>
+                </div>
+
+                <!-- Pad 4 -->
+                <div class="pad-widget">
+                    <h3>🌿 Pianta 4</h3>
+                    <div class="pad-data">
+                        <div class="pad-data-item">
+                            <label>Temperatura</label>
+                            <div class="value" id="pad4Temp">24°C</div>
+                        </div>
+                        <div class="pad-data-item">
+                            <label>Umidità</label>
+                            <div class="value" id="pad4Humidity">64%</div>
+                        </div>
+                    </div>
+                    <div class="control-card" style="background: white; border: none; padding: 0;">
+                        <h3 style="margin-bottom: 12px;">💧 Irrigazione</h3>
+                        <input type="range" class="slider" min="0" max="100" value="0" id="pumpSlider4">
+                        <div class="slider-value">Speed: <span id="pumpValue4">0</span>%</div>
+                        <button class="btn-on" onclick="togglePump(4)">Turn On</button>
+                        <button class="btn-off" onclick="togglePump(4)">Turn Off</button>
+                        <div class="status inactive" id="pumpStatus4">OFF</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
